@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dap/Mapper接口-->
+<mapper namespace="com.kuang.dao.UserMapper">
+
+    <select id="getUserLike" resultType="com.kuang.pojo.User">
+        select * from mybatis.user where name like "%"#{value}"%"
+    </select>
+
+<!--    select查询语句-->
+    <select id="getUserList" resultType="com.kuang.pojo.User">
+        select * from mybatis.user
+    </select>
+    <select id="getUserById" parameterType="int" resultType="com.kuang.pojo.User">
+        select * from mybatis.user where id = #{id}
+    </select>
+
+    <select id="getUserById2" parameterType="map" resultType="com.kuang.pojo.User">
+        select * from mybatis.user where id = #{id} and name = #{name};
+    </select>
+
+<!--    对象中的属性，可以直接取出来-->
+    <insert id="addUser" parameterType="com.kuang.pojo.User">
+        insert into mybatis.user (id,name,pwd) value (#{id},#{name },#{pwd});
+    </insert>
+
+    <insert id="addUser2" parameterType="map">
+        insert into mybatis.user (id,name ,pwd) values (#{userid},#{userName},#{passWord});
+    </insert>
+
+    <update id="updateUser" parameterType="com.kuang.pojo.User">
+        update mybatis.user
+        set name = #{name},pwd = #{pwd}
+        where id = #{id};
+    </update>
+
+    <delete id="deleteUser" parameterType="com.kuang.pojo.User">
+        delete  from mybatis.user where id = #{id};
+    </delete>
+
+
+</mapper>
